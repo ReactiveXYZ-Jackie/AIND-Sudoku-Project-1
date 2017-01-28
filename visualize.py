@@ -1,5 +1,4 @@
 from PySudoku import play
-
 def visualize_assignments(assignments):
     """ Visualizes the set of assignments created by the Sudoku AI"""
     last_assignment = None

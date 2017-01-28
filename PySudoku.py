@@ -6,7 +6,6 @@ from GameResources import *
 digits = '123456789'
 rows = 'ABCDEFGHI'
 
-
 def play(values_list):
     pygame.init()
 
@@ -21,9 +20,9 @@ def play(values_list):
     # The puzzleNumber sets a seed so either generate
     # a random number to fill in here or accept user
     # input for a duplicatable puzzle.
-
     for values in values_list:
         pygame.event.pump()
+
         theSquares = []
         initXLoc = 0
         initYLoc = 0
