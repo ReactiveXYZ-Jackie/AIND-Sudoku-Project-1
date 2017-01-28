@@ -3,11 +3,11 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: We apply an extra layer of filtration in the methods reduce puzzle so that we can reduce more potential search spaces.
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: In diagonal sudoku, we use the same strategies in terms of elimination and searching, but add another layer of unit for both constraints.
 
 ### Install
 
