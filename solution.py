@@ -78,46 +78,51 @@ def display(values):
         if r in 'CF': print(line)
     print
 
-def naked_twins(values):
-    """Eliminate values using the naked twins strategy.
-    Args:
-        values(dict): a dictionary of the form {'box_name': '123456789', ...}
+def naked(num_value, values):
 
-    Returns:
-        the values dictionary with the naked twins eliminated from peers.
     """
-
-    # Find all instances of naked twins
-    # Eliminate the naked twins as possibilities for their peers
+    Find and eliminate values in a unit that is constrained by certain
+    number of values in certain boxes
+    Args:
+        num_value(int): the number of available values if matched to eliminate
+        values(dict): the Sudoku in dictionary form
+    """
 
     # loop through all unitlists
     for unitlist in unitlists:
-        # init twin
-        twin_value = '-1'
+        # init value that is going to be eliminated
+        value_to_remove = '-1'
         
-        # start searching for twin
+        # start searching for boxes with designated amount of values
         for index, box in enumerate(unitlist):
-            # found a naked double
-            if len(values[box]) == 2:
-                # check if it has any twins
+            # found a target box
+            if len(values[box]) == num_value:
+                # check if there are other box with the same number of values
                 for comparison in unitlist[(index + 1):]:
-                    # found a naked twin and stop
+                    # found a match and stop
                     if values[comparison] == values[box]:
-                        twin_value = values[comparison]
+                        value_to_remove = values[comparison]
                         break
 
-        if int(twin_value) > 0:
-            # eliminate twin values from other peers in the same unit
-            non_twin_boxes = [box for box in unitlist if len(values[box]) > 2]
-            for box in non_twin_boxes:
-                for digit in twin_value:
+        # if we've got a match
+        if int(value_to_remove) > 0:
+            # eliminate the found values from other peers in the same unit
+            non_matching_boxes = [box for box in unitlist if len(values[box]) > num_value]
+            for box in non_matching_boxes:
+                for digit in value_to_remove:
                     values[box] = values[box].replace(digit, '')
 
         # reset twin value
-        twin_value = -1
+        value_to_remove = '-1'
 
     return values
-        
+
+def naked_twins(values):
+    """
+    Eliminate boxes in same unit with repetition of 2 values
+    """
+    return naked(2, values)
+    
 
 def eliminate(values):
     # for each box, if a box only has one value, eliminate it from all of its peers
