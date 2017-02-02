@@ -110,7 +110,7 @@ def naked(num_value, values):
             non_matching_boxes = [box for box in unitlist if len(values[box]) > num_value]
             for box in non_matching_boxes:
                 for digit in value_to_remove:
-                    values[box] = values[box].replace(digit, '')
+                    values = assign_value(values, box, values[box].replace(digit, ''))
 
         # reset twin value
         value_to_remove = '-1'
